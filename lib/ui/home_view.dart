@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tag_archiver_app/joke.dart';
+import 'package:tag_archiver_app/domain/home_vm.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
