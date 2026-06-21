@@ -2,7 +2,7 @@ name: Deploy Flutter Web to Pages
 
 on:
   push:
-    branches: [ "main" ] # Trigger on push to main
+    branches: [ "release" ] # Trigger on push to main
   workflow_dispatch:     # Allow manual trigger
 
 # Sets permissions to deploy to Pages
