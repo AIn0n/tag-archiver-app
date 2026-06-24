@@ -12,7 +12,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(title: const Text('Random Joke Generator')),
       body: SizedBox.expand(
         child: FlutterMap(
-          options: MapOptions(
+          options: const MapOptions(
             initialCenter: LatLng(
               51.509364,
               -0.128928,
