@@ -13,7 +13,7 @@ class LoginNotifier extends _$LoginNotifier {
     state = AsyncLoading();
     await Future.delayed(const Duration(seconds: 2));
     if (username == "dupa" && pw == "chuj") {
-      state = AsyncData(false);
+      state = AsyncData(true);
     } else {
       state = AsyncError("undefined user", StackTrace.current);
     }

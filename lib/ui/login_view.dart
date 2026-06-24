@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tag_archiver_app/login_vm.dart';
+import 'package:tag_archiver_app/domain/login_vm.dart';
+
+import '../routing/routes.dart';
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
@@ -15,7 +17,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final doesLoginFailed = ref.watch(loginProvider);
+    final isLoginSuccess = ref.watch(loginProvider);
+
+    ref.listen(loginProvider, (_, next) {
+      if (next.value == true) {
+        HomeRoute().go(context);
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(title: const Text("login")),
@@ -46,10 +54,10 @@ class _LoginViewState extends ConsumerState<LoginView> {
               },
               child: Text("Login"),
             ),
-            switch (doesLoginFailed) {
-              AsyncLoading<bool>() => CircularProgressIndicator(),
-              AsyncData<bool>() => Text("No errror!"),
-              AsyncError<bool>() => Text("Error!"),
+            switch (isLoginSuccess) {
+              AsyncLoading() => CircularProgressIndicator(),
+              AsyncData() => SizedBox.shrink(),
+              AsyncError() => Text("Error!"),
             },
           ],
         ),

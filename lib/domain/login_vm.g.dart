@@ -33,13 +33,13 @@ final class LoginNotifierProvider
   LoginNotifier create() => LoginNotifier();
 }
 
-String _$loginNotifierHash() => r'7b2644d30ebef611308f2679458e7f1ff1e40914';
+String _$loginNotifierHash() => r'58e6f51957a3ea5ce4f54727deef2497bb492fe3';
 
 abstract class _$LoginNotifier extends $AsyncNotifier<bool> {
   FutureOr<bool> build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<bool>, bool>;
     final element =
         ref.element
@@ -49,6 +49,6 @@ abstract class _$LoginNotifier extends $AsyncNotifier<bool> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
