@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tag_archiver_app/domain/home_vm.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -10,41 +11,34 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Random Joke Generator')),
       body: SizedBox.expand(
-        child: Consumer(
-          builder: (context, ref, child) {
-            final randomJoke = ref.watch(randomJokeProvider);
-            return Stack(
-              alignment: Alignment.center,
-              children: [
-                if (randomJoke.isRefreshing)
-                  const Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: LinearProgressIndicator(),
-                  ),
-                switch (randomJoke) {
-                  AsyncValue(:final value?) => SelectableText(
-                    '${value.setup}\n\n ${value.punchline}',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  AsyncValue(error: != null) => const Text(
-                    "error fetching joke",
-                  ),
-                  AsyncValue() => const CircularProgressIndicator(),
-                },
-
-                Positioned(
-                  bottom: 20,
-                  child: ElevatedButton(
-                    onPressed: () => ref.invalidate(randomJokeProvider),
-                    child: const Text('Get another joke'),
+        child: FlutterMap(
+          options: MapOptions(
+            initialCenter: LatLng(
+              51.509364,
+              -0.128928,
+            ), // Center the map over London, UK
+            initialZoom: 9.2,
+          ),
+          children: [
+            TileLayer(
+              // Bring your own tiles
+              urlTemplate:
+                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png', // For demonstration only
+              userAgentPackageName: 'test.tag-archiver.app',
+              // And many more recommended properties!
+            ),
+            RichAttributionWidget(
+              // Include a stylish prebuilt attribution widget that meets all requirments
+              attributions: [
+                TextSourceAttribution(
+                  'OpenStreetMap contributors',
+                  onTap: () => launchUrl(
+                    Uri.parse('https://openstreetmap.org/copyright'),
                   ),
                 ),
               ],
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
