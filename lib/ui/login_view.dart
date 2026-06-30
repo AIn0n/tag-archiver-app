@@ -21,7 +21,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
 
     ref.listen(loginProvider, (_, next) {
       if (next.value == true) {
-        HomeRoute().go(context);
+        const HomeRoute().go(context);
       }
     });
 
@@ -30,18 +30,18 @@ class _LoginViewState extends ConsumerState<LoginView> {
       body: Center(
         child: Column(
           children: [
-            Text("Hello world from login screen"),
+            const Text("Hello world from login screen"),
 
             TextFormField(
               controller: loginController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Login",
               ),
             ),
             TextFormField(
               controller: pwController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "password",
               ),
@@ -52,12 +52,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     .watch(loginProvider.notifier)
                     .login(loginController.text, pwController.text);
               },
-              child: Text("Login"),
+              child: const Text("Login"),
             ),
             switch (isLoginSuccess) {
-              AsyncLoading() => CircularProgressIndicator(),
-              AsyncData() => SizedBox.shrink(),
-              AsyncError() => Text("Error!"),
+              AsyncLoading() => const CircularProgressIndicator(),
+              AsyncData() => const SizedBox.shrink(),
+              AsyncError() => const Text("Error!"),
             },
           ],
         ),
