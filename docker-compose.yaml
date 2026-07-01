@@ -1,0 +1,8 @@
+services:
+  flutter:
+    container_name: gruby_maciek_pl
+    ports:
+      - 8080:80
+    build:
+      context: .
+      dockerfile: .docker/dockerfile

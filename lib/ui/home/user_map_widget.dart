@@ -12,12 +12,12 @@ class UserMapWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return FlutterMap(
-      options: MapOptions(initialCenter: userLocation, initialZoom: 9.2),
+      options: MapOptions(initialCenter: userLocation, initialZoom: 12.0),
       children: [
         TileLayer(
           // Bring your own tiles
-          urlTemplate:
-              'https://tile.openstreetmap.org/{z}/{x}/{y}.png', // For demonstration only
+          urlTemplate: 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+          subdomains: const ['a', 'b', 'c'],
           userAgentPackageName: 'test.tag-archiver.app',
           // And many more recommended properties!
         ),

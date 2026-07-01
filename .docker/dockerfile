@@ -1,0 +1,16 @@
+FROM fischerscode/flutter:latest as build
+
+RUN flutter upgrade
+WORKDIR /app
+
+COPY pubspec.* ./
+RUN flutter pub get
+
+COPY . .
+RUN flutter build web --release
+
+FROM busybox:latest as deploy
+
+COPY --from=build /app/build/web /www
+
+CMD [ "httpd", "-f", "-p", "80", "-h", "/www" ]
