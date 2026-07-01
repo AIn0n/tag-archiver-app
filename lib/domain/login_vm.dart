@@ -10,10 +10,10 @@ class LoginNotifier extends _$LoginNotifier {
   }
 
   Future<void> login(String username, String pw) async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
     await Future.delayed(const Duration(seconds: 2));
     if (username == "dupa" && pw == "chuj") {
-      state = AsyncData(true);
+      state = const AsyncData(true);
     } else {
       state = AsyncError("undefined user", StackTrace.current);
     }

@@ -9,5 +9,11 @@ codegen:
 local:
     flutter run -d web-server
 
+# run app locally using docker compose, app avaialble at port 8080
+dev_docker:
+    docker compose up --build --remove-orphans
+
+
 alias c := codegen
 alias l := local
+alias d := dev_docker
