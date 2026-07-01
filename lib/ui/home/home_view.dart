@@ -12,15 +12,16 @@ class HomeView extends ConsumerWidget {
     final currPos = ref.watch(getCurrentPositionProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Random Joke Generator')),
+      appBar: AppBar(title: const Text('Map')),
       body: SizedBox.expand(
         child: switch (currPos) {
           AsyncData(:final value) => UserMapWidget(userLocation: value),
           AsyncError() => const UserMapWidget(
             userLocation: LatLng(
+              // default position: Lodz City
               51.759444,
               19.458611,
-            ), // default position: Lodz City
+            ),
           ),
           AsyncLoading() => const CircularProgressIndicator(),
         },
