@@ -6,7 +6,7 @@ WORKDIR /app
 COPY pubspec.* ./
 RUN flutter pub get
 
-COPY . .
+COPY --chown=flutter:flutter . .
 RUN flutter build web --release
 
 FROM busybox:latest as deploy

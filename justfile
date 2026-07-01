@@ -11,7 +11,7 @@ local:
 
 # run app locally using docker compose, app avaialble at port 8080
 dev_docker:
-    docker compose up --build --remove-orphans
+    docker compose up --build --remove-orphans --detach
 
 
 alias c := codegen

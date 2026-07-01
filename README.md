@@ -1,4 +1,4 @@
-# GRUBYMACIEK
+# GRUBYMACIEK.PL
 
 ## Running project locally using docker compose
 
@@ -17,5 +17,5 @@ just d
 ### Run using docker compose
 
 ```bash
-docker compose up --build --remove-orphans
+docker compose up --build --remove-orphans --detach
 ```
