@@ -12,7 +12,7 @@ class HomeView extends ConsumerWidget {
     final currPos = ref.watch(getCurrentPositionProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Map')),
+      appBar: AppBar(title: const Text('123')),
       body: SizedBox.expand(
         child: switch (currPos) {
           AsyncData(:final value) => UserMapWidget(userLocation: value),
