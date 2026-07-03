@@ -20,7 +20,7 @@ class HomeView extends ConsumerWidget {
             userLocation: LatLng(
               // default position: Lodz City
               51.759444,
-              19.458611,
+              19.448611,
             ),
           ),
           AsyncLoading() => const CircularProgressIndicator(),
