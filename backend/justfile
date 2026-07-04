@@ -1,0 +1,11 @@
+default:
+    just --list
+
+run:
+    go run .
+
+build:
+    go build -race -o gruby .
+
+alias r := run
+alias b := build
