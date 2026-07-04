@@ -1,2 +1,3 @@
-gruby
+build/*
 tmp/*
+.env

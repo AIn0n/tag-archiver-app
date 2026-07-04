@@ -2,7 +2,10 @@ module github.com/AIn0n/tag-archiver-app
 
 go 1.26.0
 
-require github.com/go-fuego/fuego v0.19.0
+require (
+	github.com/go-fuego/fuego v0.19.0
+	github.com/joho/godotenv v1.5.1
+)
 
 require (
 	github.com/gabriel-vasile/mimetype v1.4.11 // indirect
