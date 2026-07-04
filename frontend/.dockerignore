@@ -1,0 +1,14 @@
+# .dockerignore - exclude non-essential files
+.git/
+.dart_tool/
+.packages
+.github/
+frontend/build/
+frontend/ios/
+frontend/android/
+frontend/test/
+*.md
+.gitignore
+.metadata
+frontend/.flutter-plugins-dependencies
+frontend/analysis_options.yaml

@@ -1,6 +1,6 @@
-# GRUBYMACIEK
+# GRUBYMACIEK.PL
 
-## Running project locally using docker compose
+## (Frontend) Running project locally using docker compose
 
 ### Requirements
 
@@ -17,5 +17,5 @@ just d
 ### Run using docker compose
 
 ```bash
-docker compose up --build --remove-orphans
+docker compose up --build --remove-orphans --detach
 ```
