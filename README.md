@@ -1,6 +1,6 @@
 # GRUBYMACIEK.PL
 
-## Running project locally using docker compose
+## (Frontend) Running project locally using docker compose
 
 ### Requirements
 

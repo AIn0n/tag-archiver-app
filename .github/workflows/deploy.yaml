@@ -29,18 +29,21 @@ jobs:
           channel: 'stable'
 
       - name: Enable Web
+        working-directory: ./frontend
         run: flutter config --enable-web
 
       - name: Get dependencies
+        working-directory: ./frontend
         run: flutter pub get
 
       - name: Build Web
+        working-directory: ./frontend
         run: flutter build web --release --base-href /tag-archiver-app/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './build/web' # Uploads the build folder
+          path: './frontend/build/web' # Uploads the build folder
 
   deploy:
     needs: build
