@@ -1,8 +1,18 @@
 services:
   flutter:
-    container_name: gruby_maciek_pl
+    container_name: gruby_maciek_fe
     ports:
       - 8080:80
     build:
       context: frontend/.
+      dockerfile: dockerfile
+
+  go:
+    container_name: gruby_maciek_be
+    ports:
+      - 9999:9999
+    volumes:
+      - ./backend:/app
+    build:
+      context: backend/.
       dockerfile: dockerfile
