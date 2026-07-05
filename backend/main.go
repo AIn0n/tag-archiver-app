@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/AIn0n/tag-archiver-app/src/env"
-	"github.com/AIn0n/tag-archiver-app/src/server"
+	"maciek/src/config"
+	"maciek/src/server"
 )
 
 func main() {
-	env.LoadEnv()
+	config.Config = config.LoadConfig()
 	err := server.NewServer().Run()
 	if err != nil {
 		panic(err)

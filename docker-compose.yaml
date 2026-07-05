@@ -16,3 +16,13 @@ services:
     build:
       context: backend/.
       dockerfile: dockerfile
+
+  postgres:
+    container_name: gruby_maciek_db
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
+    ports:
+      - 5432:5432
