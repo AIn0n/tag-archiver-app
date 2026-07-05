@@ -7,9 +7,8 @@ import (
 	"github.com/go-fuego/fuego"
 )
 
-var conf = config.Config
-
 func NewServer() *fuego.Server {
+	conf := config.Config
 	s := fuego.NewServer(
 		fuego.WithAddr(fmt.Sprintf("%s:%s", conf.HOST, conf.PORT)),
 	)
