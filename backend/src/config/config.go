@@ -7,36 +7,36 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type config struct {
-	PORT              string
-	HOST              string
-	POSTGRES_USER     string
-	POSTGRES_PASSWORD string
-	POSTGRES_DB       string
-	POSTGRES_PORT     string
+type Config struct {
+	Port             string
+	Host             string
+	PostgresUser     string
+	PostgresPassword string
+	PostgresDB       string
+	PostgresPort     string
+	PostgresHost     string
 }
 
-var Config config
-
-func LoadConfig() config {
+func Load() Config {
 	err := godotenv.Load()
 	if err != nil {
-		log.Errorf("TODO unhandled error wen loading env: %s", err.Error())
+		log.Debug("No .env file found")
 	}
-	return config{
+	return Config{
 		getEnv("PORT"),
 		getEnv("HOST"),
 		getEnv("POSTGRES_USER"),
 		getEnv("POSTGRES_PASSWORD"),
 		getEnv("POSTGRES_DB"),
 		getEnv("POSTGRES_PORT"),
+		getEnv("POSTGRES_HOST"),
 	}
 }
 
 func getEnv(name string) string {
 	v := os.Getenv(name)
 	if v == "" {
-		log.Warnf("Missing environment variable: %s!", name)
+		log.Fatalf("Missing required environment variable: %s!", name)
 	}
 	return v
 }

@@ -3,29 +3,31 @@ package database
 import (
 	"fmt"
 	"maciek/src/config"
-
-	"github.com/charmbracelet/log"
+	"maciek/src/model"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
-type database struct {
-	*gorm.DB
-}
-
-var DB database
-
-func NewDB() database {
-	conf := config.Config
-	db, err := gorm.Open(postgres.Open(fmt.Sprintf(
-		"user=%s password=%s dbname=%s port=%s host=postgres sslmode=disable TimeZone=Europe/Warsaw",
-		conf.POSTGRES_USER, conf.POSTGRES_PASSWORD, conf.POSTGRES_DB, conf.POSTGRES_PORT,
-	)))
+func New(conf config.Config) (*gorm.DB, error) {
+	db, err := gorm.Open(
+		postgres.Open(fmt.Sprintf(
+			"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
+			conf.PostgresHost, conf.PostgresUser, conf.PostgresPassword, conf.PostgresDB, conf.PostgresPort,
+		)),
+		&gorm.Config{
+			Logger: logger.Default.LogMode(logger.Silent),
+		},
+	)
 	if err != nil {
-		log.Errorf("TODO unhandled db connection error: %s", err.Error())
-		return database{}
+		return nil, err
 	}
-	log.Infof("Successfully connected to database: %s", db.Dialector.Name())
-	return database{db}
+
+	err = db.AutoMigrate(&model.Tag{})
+	if err != nil {
+		return nil, err
+	}
+
+	return db, nil
 }
