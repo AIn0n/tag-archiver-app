@@ -6,6 +6,8 @@ services:
     build:
       context: frontend/.
       dockerfile: dockerfile
+    environment:
+      TZ: Europe/Warsaw
 
   go:
     container_name: gruby_maciek_be
@@ -16,6 +18,8 @@ services:
     build:
       context: backend/.
       dockerfile: dockerfile
+    environment:
+      TZ: Europe/Warsaw
 
   postgres:
     container_name: gruby_maciek_db
@@ -26,3 +30,6 @@ services:
       - ./data:/data
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    environment:
+      TZ: Europe/Warsaw
+      PGTZ: Europe/Warsaw

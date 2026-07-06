@@ -2,24 +2,21 @@ package main
 
 import (
 	"maciek/src/config"
-	"maciek/src/server"
-
-	"github.com/charmbracelet/log"
-	"github.com/muesli/termenv"
-
 	"maciek/src/database"
+	"maciek/src/logger"
+	"maciek/src/server"
 )
 
+var log = logger.New()
+
 func main() {
-	log.SetLevel(log.DebugLevel)
-	log.SetColorProfile(termenv.ANSI)
 	conf := config.Load()
 
 	db, err := database.New(conf)
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Infof("Connected to database: %s", db.Dialector.Name())
+	log.Infof("Connected to database: %s", db.Migrator().CurrentDatabase())
 
 	err = server.New(conf, db).Run()
 	if err != nil {

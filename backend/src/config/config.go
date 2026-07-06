@@ -3,7 +3,8 @@ package config
 import (
 	"os"
 
-	"github.com/charmbracelet/log"
+	"maciek/src/logger"
+
 	"github.com/joho/godotenv"
 )
 
@@ -17,10 +18,12 @@ type Config struct {
 	PostgresHost     string
 }
 
+var log = logger.New()
+
 func Load() Config {
 	err := godotenv.Load()
 	if err != nil {
-		log.Debug("No .env file found")
+		log.Warn("No .env file found")
 	}
 	return Config{
 		getEnv("PORT"),
@@ -36,7 +39,7 @@ func Load() Config {
 func getEnv(name string) string {
 	v := os.Getenv(name)
 	if v == "" {
-		log.Fatalf("Missing required environment variable: %s!", name)
+		log.Errorf("Missing required environment variable: %s!", name)
 	}
 	return v
 }

@@ -4,24 +4,27 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"maciek/src/model"
 
 	"gorm.io/gorm"
 )
 
-var ErrTagNotFound = errors.New("tag not found")
+var errTagNotFound = errors.New("tag not found")
 
-type Repository struct {
-	DB *gorm.DB
+type repository struct {
+	db *gorm.DB
 }
 
-func (r *Repository) getById(id string, ctx context.Context) (*model.Tag, error) {
-	found, err := gorm.G[model.Tag](r.DB).
+func NewRepository(db *gorm.DB) *repository {
+	return &repository{db}
+}
+
+func (r *repository) getById(id string, ctx context.Context) (*Tag, error) {
+	found, err := gorm.G[Tag](r.db).
 		Where("img_path = ?", fmt.Sprintf("/%s", id)).
 		First(ctx)
-
+	
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, ErrTagNotFound
+		return nil, errTagNotFound
 	}
 	if err != nil {
 		return nil, err
