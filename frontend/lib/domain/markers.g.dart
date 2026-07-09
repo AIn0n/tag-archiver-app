@@ -9,87 +9,46 @@ part of 'markers.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(getMarkersForPosition)
-final getMarkersForPositionProvider = GetMarkersForPositionFamily._();
+@ProviderFor(Markers)
+final markersProvider = MarkersProvider._();
 
-final class GetMarkersForPositionProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<List<Marker>>,
-          List<Marker>,
-          FutureOr<List<Marker>>
-        >
-    with $FutureModifier<List<Marker>>, $FutureProvider<List<Marker>> {
-  GetMarkersForPositionProvider._({
-    required GetMarkersForPositionFamily super.from,
-    required ({double lat, double lon}) super.argument,
-  }) : super(
-         retry: null,
-         name: r'getMarkersForPositionProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
+final class MarkersProvider
+    extends $AsyncNotifierProvider<Markers, List<MapMarker>> {
+  MarkersProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'markersProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
-  String debugGetCreateSourceHash() => _$getMarkersForPositionHash();
-
-  @override
-  String toString() {
-    return r'getMarkersForPositionProvider'
-        ''
-        '$argument';
-  }
+  String debugGetCreateSourceHash() => _$markersHash();
 
   @$internal
   @override
-  $FutureProviderElement<List<Marker>> $createElement(
-    $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<List<Marker>> create(Ref ref) {
-    final argument = this.argument as ({double lat, double lon});
-    return getMarkersForPosition(ref, lat: argument.lat, lon: argument.lon);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is GetMarkersForPositionProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
-  }
+  Markers create() => Markers();
 }
 
-String _$getMarkersForPositionHash() =>
-    r'5f5230ad574d7ccdd0670f743d5a82bedaf57d23';
+String _$markersHash() => r'7979ee5f4d56f8c663fe702f3c68c5c26d6f535c';
 
-final class GetMarkersForPositionFamily extends $Family
-    with
-        $FunctionalFamilyOverride<
-          FutureOr<List<Marker>>,
-          ({double lat, double lon})
-        > {
-  GetMarkersForPositionFamily._()
-    : super(
-        retry: null,
-        name: r'getMarkersForPositionProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  GetMarkersForPositionProvider call({
-    required double lat,
-    required double lon,
-  }) => GetMarkersForPositionProvider._(
-    argument: (lat: lat, lon: lon),
-    from: this,
-  );
-
+abstract class _$Markers extends $AsyncNotifier<List<MapMarker>> {
+  FutureOr<List<MapMarker>> build();
+  @$mustCallSuper
   @override
-  String toString() => r'getMarkersForPositionProvider';
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<List<MapMarker>>, List<MapMarker>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<List<MapMarker>>, List<MapMarker>>,
+              AsyncValue<List<MapMarker>>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
 }

@@ -25,14 +25,17 @@ class _UserMapState extends ConsumerState<UserMapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final markers = ref.watch(getMarkersForPositionProvider);
+    final markers = ref.watch(markersProvider);
     return FlutterMap(
       mapController: _mapController,
       options: MapOptions(
         initialCenter: widget.initialCenterPos,
         initialZoom: 17.0,
+        onMapReady: () => fetchMarkers(),
         onMapEvent: (MapEvent event) {
-          if (event is MapEventMoveEnd) {}
+          if (event is MapEventMoveEnd) {
+            fetchMarkers();
+          }
         },
       ),
       children: [
@@ -42,20 +45,22 @@ class _UserMapState extends ConsumerState<UserMapWidget> {
           userAgentPackageName: 'test.tag-archiver.app',
           // And many more recommended properties!
         ),
-        const MarkerLayer(
-          markers: [
-            Marker(
-              point: LatLng(51.73930349296944, 19.38546432264114),
-              width: 80,
-              height: 80,
-              child: Icon(
-                Icons.location_pin,
-                color: Color(0xFF3B5998),
-                size: 40,
-              ),
-            ),
-          ],
-        ),
+        if (markers.hasValue)
+          MarkerLayer(
+            markers: [
+              for (var marker in markers.value!)
+                Marker(
+                  point: marker.pos,
+                  width: 80,
+                  height: 80,
+                  child: const Icon(
+                    Icons.location_pin,
+                    color: Color(0xFF3B5998),
+                    size: 40,
+                  ),
+                ),
+            ],
+          ),
         RichAttributionWidget(
           // Include a stylish prebuilt attribution widget that meets all requirments
           attributions: [
@@ -68,5 +73,14 @@ class _UserMapState extends ConsumerState<UserMapWidget> {
         ),
       ],
     );
+  }
+
+  void fetchMarkers() {
+    ref
+        .watch(markersProvider.notifier)
+        .fetchMarkers(
+          _mapController.camera.center.longitude,
+          _mapController.camera.center.latitude,
+        );
   }
 }
