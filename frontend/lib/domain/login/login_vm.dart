@@ -5,8 +5,8 @@ part 'login_vm.g.dart';
 @riverpod
 class LoginNotifier extends _$LoginNotifier {
   @override
-  Future<bool> build() async {
-    return Future.value(false);
+  FutureOr<bool> build() async {
+    return false;
   }
 
   Future<void> login(String username, String pw) async {

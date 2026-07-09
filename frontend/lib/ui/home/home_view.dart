@@ -15,9 +15,9 @@ class HomeView extends ConsumerWidget {
       appBar: AppBar(title: const Text('123')),
       body: SizedBox.expand(
         child: switch (currPos) {
-          AsyncData(:final value) => UserMapWidget(userLocation: value),
+          AsyncData(:final value) => UserMapWidget(initialCenterPos: value),
           AsyncError() => const UserMapWidget(
-            userLocation: LatLng(
+            initialCenterPos: LatLng(
               // default position: Lodz City
               51.759444,
               19.448611,
