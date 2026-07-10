@@ -1,0 +1,15 @@
+default:
+    just --list
+
+init:
+    go install github.com/air-verse/air@latest
+
+run:
+    air
+
+build:
+    go build -race -o build/gruby.o .
+
+alias i := init
+alias r := run
+alias b := build

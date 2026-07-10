@@ -1,8 +1,35 @@
 services:
   flutter:
-    container_name: gruby_maciek_pl
+    container_name: gruby_maciek_fe
     ports:
       - 8080:80
     build:
       context: frontend/.
       dockerfile: dockerfile
+    environment:
+      TZ: Europe/Warsaw
+
+  go:
+    container_name: gruby_maciek_be
+    ports:
+      - 9999:9999
+    volumes:
+      - ./backend:/app
+    build:
+      context: backend/.
+      dockerfile: dockerfile
+    environment:
+      TZ: Europe/Warsaw
+
+  postgres:
+    container_name: gruby_maciek_db
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    environment:
+      TZ: Europe/Warsaw
+      PGTZ: Europe/Warsaw
