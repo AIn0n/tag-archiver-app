@@ -3,6 +3,7 @@ default:
 
 # run build_runner to generate all needed code for app to work
 codegen:
+    dart run swagger_parser
     dart run build_runner build
 
 # run app locally as a webpage
