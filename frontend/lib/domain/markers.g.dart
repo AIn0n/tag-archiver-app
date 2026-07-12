@@ -33,7 +33,7 @@ final class MarkersProvider
   Markers create() => Markers();
 }
 
-String _$markersHash() => r'7979ee5f4d56f8c663fe702f3c68c5c26d6f535c';
+String _$markersHash() => r'1808306cf68294d68246cce13b257f0c676a34a0';
 
 abstract class _$Markers extends $AsyncNotifier<List<MapMarker>> {
   FutureOr<List<MapMarker>> build();
