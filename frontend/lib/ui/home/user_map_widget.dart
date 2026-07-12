@@ -71,6 +71,14 @@ class _UserMapState extends ConsumerState<UserMapWidget> {
             ),
           ],
         ),
+        Align(
+          alignment: AlignmentGeometry.bottomCenter,
+          child: TextButton(
+            onPressed: () => print("It works!"),
+            style: TextButton.styleFrom(backgroundColor: Colors.blue),
+            child: const Text("Add new tag"),
+          ),
+        ),
       ],
     );
   }
