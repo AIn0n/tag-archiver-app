@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tag_archiver_app/ui/add_tag_view.dart';
 import 'package:tag_archiver_app/ui/home/home_view.dart';
 import 'package:tag_archiver_app/ui/login_view.dart';
 
@@ -19,6 +20,14 @@ class HomeRoute extends GoRouteData with $HomeRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const HomeView();
+}
+
+@TypedGoRoute<AddTagRoute>(path: "/add-tag")
+class AddTagRoute extends GoRouteData with $AddTagRoute {
+  const AddTagRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const AddTagView();
 }
 
 final router = GoRouter(routes: $appRoutes);
