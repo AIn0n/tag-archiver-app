@@ -41,4 +41,4 @@ final class GetCurrentPositionProvider
 }
 
 String _$getCurrentPositionHash() =>
-    r'b7cf49cc3ca71cfcf03fcfa0f3582824813a4993';
+    r'6e45332a8d8a0f3e7d7a1290fab737f67ae31616';

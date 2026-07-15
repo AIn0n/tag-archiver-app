@@ -1,0 +1,6 @@
+swagger_parser:
+  schema_path: schemes/example_open_api.json
+  json_serializer: json_serializable
+  dio_options_parameter_by_default: true
+  put_in_folder: true
+  output_directory: lib/api

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tag_archiver_app/domain/login_vm.dart';
+import 'package:tag_archiver_app/domain/login/login_vm.dart';
 
 import '../routing/routes.dart';
 

@@ -1,0 +1,289 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Sample E-Commerce & Analytics API",
+        "version": "1.0.0",
+        "description": "An example OpenAPI specification featuring two distinct endpoints demonstrating URL path parameters, request bodies, and complex data models."
+    },
+    "servers": [
+        {
+            "url": "https://api.example.com/v1",
+            "description": "Production server"
+        }
+    ],
+    "paths": {
+        "/products/{productId}": {
+            "get": {
+                "summary": "Get detailed product information",
+                "description": "Retrieves comprehensive details for a specific product using its unique URL path identifier, demonstrating a complex nested return type.",
+                "operationId": "getProductById",
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "description": "The unique alphanumeric identifier of the product.",
+                        "schema": {
+                            "type": "string",
+                            "example": "prod_98765"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval of product details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductDetail"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/analytics/reports": {
+            "post": {
+                "summary": "Generate a customized sales report",
+                "description": "Accepts specific filtering parameters and metrics within the request body to generate structured, complex aggregated analytics data.",
+                "operationId": "generateSalesReport",
+                "requestBody": {
+                    "required": true,
+                    "description": "Configuration options and metrics to compile the report.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReportRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Report successfully generated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReportResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid report configuration or body data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ProductDetail": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "sku",
+                    "price",
+                    "inventory"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "prod_98765"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Ergonomic Wireless Keyboard"
+                    },
+                    "sku": {
+                        "type": "string",
+                        "example": "KB-WIRELESS-01"
+                    },
+                    "price": {
+                        "type": "object",
+                        "required": [
+                            "amount",
+                            "currency"
+                        ],
+                        "properties": {
+                            "amount": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 89.99
+                            },
+                            "currency": {
+                                "type": "string",
+                                "example": "USD"
+                            }
+                        }
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "electronics",
+                            "office",
+                            "ergonomic"
+                        ]
+                    },
+                    "inventory": {
+                        "type": "object",
+                        "required": [
+                            "status",
+                            "quantity"
+                        ],
+                        "properties": {
+                            "status": {
+                                "type": "string",
+                                "enum": [
+                                    "IN_STOCK",
+                                    "LOW_STOCK",
+                                    "OUT_TO_ORDER"
+                                ],
+                                "example": "IN_STOCK"
+                            },
+                            "quantity": {
+                                "type": "integer",
+                                "example": 142
+                            }
+                        }
+                    }
+                }
+            },
+            "ReportRequest": {
+                "type": "object",
+                "required": [
+                    "startDate",
+                    "endDate",
+                    "metrics"
+                ],
+                "properties": {
+                    "startDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2026-01-01"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2026-01-31"
+                    },
+                    "region": {
+                        "type": "string",
+                        "example": "North America"
+                    },
+                    "metrics": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "REVENUE",
+                                "UNITS_SOLD",
+                                "AVERAGE_ORDER_VALUE"
+                            ]
+                        },
+                        "example": [
+                            "REVENUE",
+                            "UNITS_SOLD"
+                        ]
+                    }
+                }
+            },
+            "ReportResponse": {
+                "type": "object",
+                "required": [
+                    "reportId",
+                    "generatedAt",
+                    "summary",
+                    "dataPoints"
+                ],
+                "properties": {
+                    "reportId": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
+                    },
+                    "generatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2026-02-01T08:30:00Z"
+                    },
+                    "summary": {
+                        "type": "object",
+                        "properties": {
+                            "totalRevenue": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 254500.75
+                            },
+                            "totalUnitsSold": {
+                                "type": "integer",
+                                "example": 3120
+                            }
+                        }
+                    },
+                    "dataPoints": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "example": "2026-01-01"
+                                },
+                                "revenue": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 8200.5
+                                },
+                                "unitsSold": {
+                                    "type": "integer",
+                                    "example": 95
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ErrorResponse": {
+                "type": "object",
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "example": "RESOURCE_NOT_FOUND"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "The requested resource could not be found."
+                    }
+                }
+            }
+        }
+    }
+}
