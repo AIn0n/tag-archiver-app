@@ -46,6 +46,7 @@ dependencies:
   swagger_parser: ^1.44.0
   retrofit: ^4.9.2
   json_annotation: ^4.12.0
+  file_picker: ^3.0.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
