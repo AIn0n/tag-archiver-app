@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:tag_archiver_app/assets/i18n/strings.g.dart';
 import 'package:tag_archiver_app/domain/markers.dart';
 import 'package:tag_archiver_app/routing/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,6 +28,7 @@ class _UserMapState extends ConsumerState<UserMapWidget> {
   @override
   Widget build(BuildContext context) {
     final markers = ref.watch(markersProvider);
+
     return FlutterMap(
       mapController: _mapController,
       options: MapOptions(
@@ -77,7 +79,7 @@ class _UserMapState extends ConsumerState<UserMapWidget> {
           child: TextButton(
             onPressed: () => const AddTagRoute().go(context),
             style: TextButton.styleFrom(backgroundColor: Colors.blue),
-            child: const Text("Add new tag"),
+            child: Text(t.addTag),
           ),
         ),
       ],

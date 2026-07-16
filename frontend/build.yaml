@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      slang_build_runner:
+        enabled: false
+      slang_build_runner:legacy:
+        options:
+          base_locale: pl
+          autodoc:
+            enabled: true
