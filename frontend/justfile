@@ -10,5 +10,10 @@ codegen:
 local:
     flutter run -d web-server
 
-alias c := codegen
+# clean generated code
+clean:
+    dart run build_runner clean
+
+alias g := codegen
 alias l := local
+alias c := clean
